@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: ${APP_ENV:dev}
+
+# API docs: off by default, turned on only in application-dev.yaml.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

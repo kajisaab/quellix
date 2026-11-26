@@ -1,0 +1,25 @@
+# Keep secrets, build output and local files out of the Docker build context.
+# The Dockerfile needs only gradlew, gradle/, build.gradle, settings.gradle and src/.
+
+# Secrets
+.env
+
+# Build output and Gradle caches
+build/
+.gradle/
+out/
+bin/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Version control
+.git/

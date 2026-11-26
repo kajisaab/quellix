@@ -1,0 +1,53 @@
+# Production config
+
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: ${APP_NAME:Quellix}
+
+  # Reactive PostgreSQL connection.
+  r2dbc:
+    url: r2dbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+    # R2DBC Connection Pool.
+    pool:
+      enabled: true
+      initial-size: 5
+      min-idle: 5
+      max-size: 20
+      max-acquire-time: 30s
+      max-create-connection-time: 10s
+      max-idle-time: 10m
+      max-life-time: 30m
+
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
+    locations: classpath:db/migration
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+# Logging
+logging:
+  structured:
+    format:
+      console:
+  level:
+    root: INFO
+    io.kajisaab: DEBUG
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.postgresql: INFO
+    org.flywaydb: INFO
+
+  file:
+    name: logs/quellix-prod.log
+
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 40
